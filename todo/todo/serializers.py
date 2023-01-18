@@ -8,10 +8,10 @@ class ProjectSerializer(HyperlinkedModelSerializer):
         fields = '__all__'
 
 
-class TodoStatusSerializer(HyperlinkedModelSerializer):
-    class Meta:
-        model = TodoStatus
-        fields = '__all__'
+# class TodoStatusSerializer(HyperlinkedModelSerializer):
+#     class Meta:
+#         model = TodoStatus
+#         fields = '__all__'
 
 
 class TodoSerializer(HyperlinkedModelSerializer):
