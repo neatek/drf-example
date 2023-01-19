@@ -7,15 +7,10 @@ from todo.views import TodoViewset, ProjectViewset
 router = DefaultRouter()
 router.register('users', UserModelViewSet)
 router.register('todo', TodoViewset)
-# router.register('status', TodoStatusViewset)
 router.register('project', ProjectViewset)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
-    # path('api/project/name/<str:name>',
-    #      ProjectQueryNameFilterViewset.as_view({'get': 'list'})),
-    # path('api/todo/project_id/<int:project_id>',
-    #      TodoQueryProjectFilter.as_view({'get': 'list'})),
     path('api/', include(router.urls)),
 ]
