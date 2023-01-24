@@ -7,7 +7,11 @@ class Project extends React.Component {
     state = { 'project': [] };
 
     componentDidMount() {
-        axios.get('http://127.0.0.1:8000/api/project/')
+        let headers = {
+            'Content-Type': 'application/json',
+            'Authorization': 'Token ' + localStorage.getItem('token')
+        };
+        axios.get('http://127.0.0.1:8000/api/project/', {headers})
             .then(response => {
                 console.log(response.data);
                 this.setState({ 'project': response.data.results });

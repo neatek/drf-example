@@ -7,7 +7,11 @@ class Todo extends React.Component {
     state = { 'todo': [] };
 
     componentDidMount() {
-        axios.get('http://127.0.0.1:8000/api/todo/')
+        let headers = {
+            'Content-Type': 'application/json',
+            'Authorization': 'Token ' + localStorage.getItem('token')
+        };
+        axios.get('http://127.0.0.1:8000/api/todo/', {headers})
             .then(response => {
                 console.log(response.data);
                 this.setState({ 'todo': response.data.results });

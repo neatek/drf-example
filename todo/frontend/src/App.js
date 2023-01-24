@@ -7,9 +7,9 @@ function App() {
   return (
     <div className="App">
       <HashRouter basename="/">
-      {/* <BrowserRouter> */}
-      <MyRoutes />
-      {/* </BrowserRouter> */}
+        {/* <BrowserRouter> */}
+        <MyRoutes />
+        {/* </BrowserRouter> */}
       </HashRouter>
 
     </div>
