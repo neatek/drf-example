@@ -1,6 +1,8 @@
 import enum
 from django.db import models
-from users.models import User
+
+# from users.models import User
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -27,7 +29,8 @@ class TodoStatus(int, enum.Enum):
 
 class Todo(models.Model):
     task = models.TextField()
+    # user = models.ForeignKey(User, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
-    status = models.SmallIntegerField('status', choices=TodoStatus.choices())
+    status = models.SmallIntegerField("status", choices=TodoStatus.choices())
     deadline = models.DateField()
