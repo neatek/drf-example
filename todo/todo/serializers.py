@@ -7,12 +7,14 @@ class ProjectSerializer(HyperlinkedModelSerializer):
     class Meta:
         model = Project
         fields = "__all__"
+        fields = ("id", "name")
 
 
 class TodoSerializer(HyperlinkedModelSerializer):
     class Meta:
         model = Todo
         fields = "__all__"
+        fields = ("id", "task", "status", "deadline", "project", "user")
 
 
 class UserModelSerializer(HyperlinkedModelSerializer):
