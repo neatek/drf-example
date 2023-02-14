@@ -24,8 +24,8 @@ SECRET_KEY = "django-insecure-xpv#^7j7h3^d0!$uazd0huf+b+ts@4+_5d5y0#y83@kf72rhm^
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
+CSRF_TRUSTED_ORIGINS = ["http://localhost:8000"]
 
 
 # Application definition
@@ -42,10 +42,10 @@ INSTALLED_APPS = [
     "rest_framework.authtoken",
     "rest_framework_simplejwt",
     "django_filters",
-    # "users",
     "todo",
     "drf_yasg",
     "graphene_django",
+    "django_createsuperuser",
 ]
 
 MIDDLEWARE = [
@@ -83,10 +83,21 @@ WSGI_APPLICATION = "todo.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
+#     }
+# }
+
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "todo",
+        "USER": "dante",
+        "PASSWORD": "dante123456",
+        "HOST": "db",
+        "PORT": "5432",
     }
 }
 
@@ -122,8 +133,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = "staticfiles/"
-STATIC_ROOT = "staticfiles"
+# STATIC_URL = "staticfiles/"
+# STATIC_ROOT = "staticfiles"
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
+STATIC_URL = "/static/"
+# FRONTEND_ROOT = os.path.join(BASE_DIR, "frontend")
+# FRONTEND_URL = "/"
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, "static"),
+# ]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
