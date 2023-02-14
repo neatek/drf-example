@@ -1,0 +1,40 @@
+version: '3.1'
+services:
+  db:
+    image: postgres:13.1
+    privileged: true
+    healthcheck:
+      test: /usr/bin/pg_isready
+      interval: 5s
+      timeout: 10s
+      retries: 120
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: dante
+      POSTGRES_PASSWORD: dante123456
+      POSTGRES_DB: todo
+    env_file: .env
+  backend:
+    build:
+      context: .
+    expose:
+      - 8080
+    
+    # && python manage.py createsuperuser --username admin --email admin@example.com --noinput
+    command: bash -c "
+      python manage.py migrate
+      && python manage.py collectstatic --no-input
+      && python manage.py createcachetable
+      && python manage.py shell < /todo/change_admin.py
+      && gunicorn todo.wsgi -b 0.0.0.0:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+  nginx:
+    build: ./nginx
+    ports:
+      - 8000:80
+    depends_on:
+      - backend
+
